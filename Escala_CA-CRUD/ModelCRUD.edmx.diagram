@@ -5,8 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b79b381aa737484eae7cc653bad8135f" Name="Diagram1">
-        <EntityTypeShape EntityType="dbsys32Model.role" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbsys32Model.user" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbsys32Model.role" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="dbsys32Model.user" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="dbsys32Model.UserRole" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="dbsys32Model.vw_UserRole" Width="1.5" PointX="2.75" PointY="3.75" />
+        <AssociationConnector Association="dbsys32Model.FK_UserRole_role" />
+        <AssociationConnector Association="dbsys32Model.FK_UserRole_user" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

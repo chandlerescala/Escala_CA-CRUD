@@ -12,18 +12,13 @@ namespace Escala_CA_CRUD
     using System;
     using System.Collections.Generic;
     
-    public partial class role
+    public partial class UserRole
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public role()
-        {
-            this.UserRole = new HashSet<UserRole>();
-        }
-    
         public int id { get; set; }
-        public string roleName { get; set; }
+        public Nullable<int> userid { get; set; }
+        public Nullable<int> roleid { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRole> UserRole { get; set; }
+        public virtual role role { get; set; }
+        public virtual user user { get; set; }
     }
 }

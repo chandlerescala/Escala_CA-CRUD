@@ -27,5 +27,7 @@ namespace Escala_CA_CRUD
     
         public virtual DbSet<role> role { get; set; }
         public virtual DbSet<user> user { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
+        public virtual DbSet<vw_UserRole> vw_UserRole { get; set; }
     }
 }
