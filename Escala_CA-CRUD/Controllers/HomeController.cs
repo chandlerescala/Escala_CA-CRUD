@@ -7,7 +7,7 @@ using System.Web.Security;
 
 namespace Escala_CA_CRUD.Controllers
 {
-    [Authorize(Roles = "User")] //set filter
+    [Authorize] //set filter
     public class HomeController : BaseController
     {
         // GET: Home
@@ -46,7 +46,6 @@ namespace Escala_CA_CRUD.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Manager")]
         public ActionResult Create()
         {
             return View();
@@ -58,13 +57,10 @@ namespace Escala_CA_CRUD.Controllers
             TempData["Msg"] = $"User {u.username} added!";
             return RedirectToAction("Index");
         }
-
         public ActionResult Details(int id)
         {
             return View(_userRepo.Get(id));
         }
-
-        [Authorize(Roles = "Manager")]
         public ActionResult Edit(int id)
         {
             return View(_userRepo.Get(id));
@@ -77,7 +73,6 @@ namespace Escala_CA_CRUD.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "Manager")]
         public ActionResult Delete(int id)
         {
             _userRepo.Delete(id);
