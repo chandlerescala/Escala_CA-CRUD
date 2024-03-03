@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        @if (User.IsInRole("Manager"))
+                        if (User.IsInRole("Manager"))
                         {
                             <li> <a href="~/Home/Create">Create</a></li>
                             <li> <a href="~/Home/">Admin Home</a></li>

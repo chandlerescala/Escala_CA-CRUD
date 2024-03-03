@@ -7,7 +7,7 @@ using System.Web.Security;
 
 namespace Escala_CA_CRUD.Controllers
 {
-    [Authorize(Roles = "User")] //set filter
+    [Authorize(Roles = "User,Manager")] //set filter
     public class HomeController : BaseController
     {
         // GET: Home
