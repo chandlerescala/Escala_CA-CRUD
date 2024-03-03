@@ -27,8 +27,7 @@ namespace Escala_CA_CRUD.Controllers
         [HttpPost]
         public ActionResult Login(user u)
         {
-            //var user = _userRepo.Table.Where(m => m.username == u.username).FirstOrDefault();
-            var user = _userRepo.GetAll().Where(m => m.username == u.username).FirstOrDefault();
+            var user = _userRepo.Table.Where(m => m.username == u.username).FirstOrDefault();
             if(user != null)
             {
                 FormsAuthentication.SetAuthCookie(u.username, false); //Set Cookie

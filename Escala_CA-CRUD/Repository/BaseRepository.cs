@@ -17,6 +17,7 @@ namespace Escala_CA_CRUD.Repository
             _db = new dbsys32Entities();
             _table = _db.Set<T>();
         }
+        public DbSet<T> Table {get { return _table; } }
         public T Get(object id)
         {
             return _table.Find(id);
