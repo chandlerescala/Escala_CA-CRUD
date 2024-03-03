@@ -43,12 +43,18 @@ namespace Escala_CA_CRUD
 
         public override string[] GetAllRoles()
         {
-            throw new NotImplementedException();
+            using (var db = new dbsys32Entities())
+            {
+                return db.vw_UserRole.Select(m => m.roleName).ToArray();
+            }
         }
 
         public override string[] GetRolesForUser(string username)
         {
-            throw new NotImplementedException();
+            using (var db = new dbsys32Entities())
+            {
+                return db.vw_UserRole.Where(m =>m.username == username).Select(m => m.roleName).ToArray();
+            }
         }
 
         public override string[] GetUsersInRole(string roleName)
