@@ -17,7 +17,7 @@ namespace Escala_CA_CRUD.Contracts
         List<T> GetAll();
         ErrorCode Create(T t);
         ErrorCode Update(object id, T t);
-
+        ErrorCode Delete(object id);
 
     }
 }
