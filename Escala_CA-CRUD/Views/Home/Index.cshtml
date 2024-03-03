@@ -9,6 +9,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@if(!String.IsNullOrEmpty(TempData["Msg"] as String))
+{
+    <div class = "alert alert-success">@TempData["Msg"] </div>
+}
 <table class="table">
     <tr>
         <th>Seq #</th>
