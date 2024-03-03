@@ -24,6 +24,14 @@ namespace Escala_CA_CRUD.Controllers
 
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
+
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(user u)
         {
