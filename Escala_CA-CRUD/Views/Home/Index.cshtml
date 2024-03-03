@@ -38,9 +38,14 @@
         @if (User.Identity.IsAuthenticated)
         {
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @if (User.IsInRole("Manager"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) 
+                    <span>|</span>
                 @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                }
+               
             </td>
         }
     </tr>

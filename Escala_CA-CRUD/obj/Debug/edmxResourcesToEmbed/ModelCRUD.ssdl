@@ -15,8 +15,66 @@
     <Property Name="username" Type="nvarchar" MaxLength="100" />
     <Property Name="password" Type="nvarchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="roleid" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'dbsys32.dbo.vw_UserRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_UserRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="100" />
+    <Property Name="roleName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_UserRole_role">
+    <End Role="role" Type="Self.role" Multiplicity="0..1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="roleid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_user">
+    <End Role="user" Type="Self.user" Multiplicity="0..1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="dbsys32ModelStoreContainer">
     <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_UserRole" EntityType="Self.vw_UserRole" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_UserRole].[id] AS [id], 
+    [vw_UserRole].[username] AS [username], 
+    [vw_UserRole].[roleName] AS [roleName]
+    FROM [dbo].[vw_UserRole] AS [vw_UserRole]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_UserRole_role" Association="Self.FK_UserRole_role">
+      <End Role="role" EntitySet="role" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_user" Association="Self.FK_UserRole_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

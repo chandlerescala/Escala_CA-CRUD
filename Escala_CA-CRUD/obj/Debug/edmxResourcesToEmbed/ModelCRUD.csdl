@@ -1,11 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="dbsys32Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="dbsys32Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="role" EntityType="dbsys32Model.role" />
+    <EntitySet Name="user" EntityType="dbsys32Model.user" />
+    <EntitySet Name="UserRole" EntityType="dbsys32Model.UserRole" />
+    <EntitySet Name="vw_UserRole" EntityType="dbsys32Model.vw_UserRole" />
+    <AssociationSet Name="FK_UserRole_role" Association="dbsys32Model.FK_UserRole_role">
+      <End Role="role" EntitySet="role" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_user" Association="dbsys32Model.FK_UserRole_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="role">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="roleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserRole" Relationship="dbsys32Model.FK_UserRole_role" FromRole="role" ToRole="UserRole" />
   </EntityType>
   <EntityType Name="user">
     <Key>
@@ -14,9 +29,48 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserRole" Relationship="dbsys32Model.FK_UserRole_user" FromRole="user" ToRole="UserRole" />
   </EntityType>
-  <EntityContainer Name="dbsys32Entities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="role" EntityType="Self.role" />
-    <EntitySet Name="user" EntityType="Self.user" />
-  </EntityContainer>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="roleid" Type="Int32" />
+    <NavigationProperty Name="role" Relationship="dbsys32Model.FK_UserRole_role" FromRole="UserRole" ToRole="role" />
+    <NavigationProperty Name="user" Relationship="dbsys32Model.FK_UserRole_user" FromRole="UserRole" ToRole="user" />
+  </EntityType>
+  <EntityType Name="vw_UserRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="roleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_UserRole_role">
+    <End Type="dbsys32Model.role" Role="role" Multiplicity="0..1" />
+    <End Type="dbsys32Model.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="roleid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_user">
+    <End Type="dbsys32Model.user" Role="user" Multiplicity="0..1" />
+    <End Type="dbsys32Model.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -4,17 +4,35 @@
     <EntitySetMapping Name="role">
       <EntityTypeMapping TypeName="dbsys32Model.role">
         <MappingFragment StoreEntitySet="role">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="roleName" ColumnName="roleName" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="user">
       <EntityTypeMapping TypeName="dbsys32Model.user">
         <MappingFragment StoreEntitySet="user">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRole">
+      <EntityTypeMapping TypeName="dbsys32Model.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="roleid" ColumnName="roleid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_UserRole">
+      <EntityTypeMapping TypeName="dbsys32Model.vw_UserRole">
+        <MappingFragment StoreEntitySet="vw_UserRole">
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
