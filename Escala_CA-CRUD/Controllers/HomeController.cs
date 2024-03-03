@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Escala_CA_CRUD.Controllers
 {
+    [Authorize] //set filter
     public class HomeController : BaseController
     {
         // GET: Home
@@ -13,6 +15,28 @@ namespace Escala_CA_CRUD.Controllers
         {
             List<user> userList = _userRepo.GetAll();
             return View(userList);
+        }
+        [AllowAnonymous] //Override
+        public ActionResult Login()
+        {
+            if(User.Identity.IsAuthenticated)
+                return RedirectToAction("Index");
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(user u)
+        {
+            //var user = _userRepo.Table.Where(m => m.username == u.username).FirstOrDefault();
+            var user = _userRepo.GetAll().Where(m => m.username == u.username).FirstOrDefault();
+            if(user != null)
+            {
+                FormsAuthentication.SetAuthCookie(u.username, false); //Set Cookie
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "User not Exist or Incorrect Password");
+
+            return View();
         }
 
         public ActionResult Create()
